@@ -39,6 +39,24 @@ or
 
 The camera lags as hell.
 
+## adding v4l2
+
+luckfox-pico-sdk/sysdrv/source/buildroot/buildroot-2023.02.6
+
+make ARCH=arm menuconfig
+
+## play
+
+v4l2-ctl --device=/dev/video11 --set-fmt-video=width=320,height=240,pixelformat=NV12 --stream-mmap --stream-to=video50.yuv --stream-count=60
+
+scp root@192.168.0.68:/root/video50.yuv .
+
+** fajne kolorki!!! **
+vlc --demux rawvideo --rawvid-fps 25 --rawvid-width 320 --rawvid-height 240 --rawvid-chroma I420 video50.yuv
+
+sad kolorki:
+vlc --demux rawvideo --rawvid-fps 25 --rawvid-width 320 --rawvid-height 240 --rawvid-chroma NV12 video50.yuv
+
 ## NN research
 
 https://github.com/rockchip-linux/rknn-toolkit2
